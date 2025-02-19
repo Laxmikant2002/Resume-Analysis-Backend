@@ -29,6 +29,7 @@ exports.enrichResume = async (req, res) => {
     await applicant.save();
     res.status(200).json(applicant);
   } catch (error) {
+    console.error('Data enrichment error:', error);
     res.status(500).json({ error: 'Data enrichment failed' });
   }
 };
@@ -54,6 +55,7 @@ exports.searchResume = async (req, res) => {
 
     res.status(200).json(encryptedResults);
   } catch (error) {
+    console.error('Search error:', error);
     res.status(500).json({ error: 'Search failed' });
   }
 };

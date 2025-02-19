@@ -2,15 +2,15 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 dotenv.config();
 
-module.exports = (req, res, next) => {
-  const token = req.header('Authorization');
-  if (!token) return res.status(401).json({ error: 'Access denied' });
-
-  try {
-    const verified = jwt.verify(token.split(' ')[1], process.env.JWT_SECRET);
-    req.user = verified;
-    next();
-  } catch (error) {
-    res.status(400).json({ error: 'Invalid token' });
+exports.login = (req, res) => {
+  const { username, password } = req.body;
+  console.log('Received username:', username);
+  console.log('Received password:', password);
+  
+  if (username === 'naval.ravikant' && password === '05111974') {
+    const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.status(200).json({ JWT: token });
+  } else {
+    res.status(401).json({ error: 'Invalid credentials' });
   }
 };

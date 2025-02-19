@@ -19,7 +19,16 @@ exports.extractData = async (rawText) => {
 
     const result = await model.generateContent(prompt);
     const response = await result.response;
-    return JSON.parse(response.text().replace(/```json/g, '').replace(/```/g, ''));
+    const responseText = await response.text();
+    console.log('Gemini API response:', responseText); // Log the response for debugging
+
+    // Attempt to parse the response as JSON
+    try {
+      return JSON.parse(responseText.replace(/```json/g, '').replace(/```/g, ''));
+    } catch (jsonError) {
+      console.error('JSON parsing error:', jsonError);
+      throw new Error('Failed to parse JSON response from Gemini API');
+    }
   } catch (error) {
     console.error('Gemini API error:', error);
     throw new Error('Failed to process text');

@@ -20,4 +20,5 @@ const applicantSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Applicant', applicantSchema);
+
 //pass = ntykc6NQskKEbnxu
