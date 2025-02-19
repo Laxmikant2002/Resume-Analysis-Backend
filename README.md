@@ -7,7 +7,7 @@ This is a mini backend project for a fictional resume analysis app. It uses Node
 1. **Clone the repository:**
    ```sh
    git clone <repository-url>
-   cd backend-test-assignment
+   cd 
    ```
 
 2. **Install dependencies:**
